@@ -1,0 +1,15 @@
+{
+  "name": "indecision-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch",
+    "play": "babel src/playground/es6-arrow-function-2.js --out-file=public/scripts/app.js --presets=env,react --watch"
+  },
+  "author": "Andrew Mead",
+  "license": "MIT",
+  "dependencies": {
+    "babel-preset-env": "1.5.2",
+    "babel-preset-react": "6.24.1"
+  }
+}

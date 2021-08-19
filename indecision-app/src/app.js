@@ -36,16 +36,33 @@ function getLocation(location) {
 let count = 0;
 
 const addOne = () => {
-    console.log('Clicked: ' + (count));
-    return count++;
+    count++;
+    renderCounterApp();
 };
 
-const templateTwo = (
-    <div>
-        <h1>Count: {count} </h1>
-        <button onClick={addOne}>+1</button>
-    </div>
-);
+const subOne = () => {
+    count--;
+    renderCounterApp();
+};
+
+const reset = () => {
+    count = 0;
+    renderCounterApp();
+};
+
 
 const appRoot = document.getElementById('app');
-ReactDOM.render(templateTwo, appRoot);
+
+const renderCounterApp = () => {
+    const templateTwo = (
+        <div>
+            <h1>Count: {count} </h1>
+            <button onClick={addOne} className="btnAdd">+1</button>
+            <button onClick={subOne} className="btnSub">-1</button>
+            <button onClick={reset} className="btnRes">Reset</button>
+        </div>
+    );
+    ReactDOM.render(templateTwo, appRoot);
+};
+
+renderCounterApp();

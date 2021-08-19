@@ -79,26 +79,50 @@ function getLocation(location) {
 var count = 0;
 
 var addOne = function addOne() {
-    console.log('Clicked: ' + count);
-    return count++;
+    count++;
+    renderCounterApp();
 };
 
-var templateTwo = React.createElement(
-    'div',
-    null,
-    React.createElement(
-        'h1',
-        null,
-        'Count: ',
-        count,
-        ' '
-    ),
-    React.createElement(
-        'button',
-        { onClick: addOne },
-        '+1'
-    )
-);
+var subOne = function subOne() {
+    count--;
+    renderCounterApp();
+};
+
+var reset = function reset() {
+    count = 0;
+    renderCounterApp();
+};
 
 var appRoot = document.getElementById('app');
-ReactDOM.render(templateTwo, appRoot);
+
+var renderCounterApp = function renderCounterApp() {
+    var templateTwo = React.createElement(
+        'div',
+        null,
+        React.createElement(
+            'h1',
+            null,
+            'Count: ',
+            count,
+            ' '
+        ),
+        React.createElement(
+            'button',
+            { onClick: addOne, className: 'btnAdd' },
+            '+1'
+        ),
+        React.createElement(
+            'button',
+            { onClick: subOne, className: 'btnSub' },
+            '-1'
+        ),
+        React.createElement(
+            'button',
+            { onClick: reset, className: 'btnRes' },
+            'Reset'
+        )
+    );
+    ReactDOM.render(templateTwo, appRoot);
+};
+
+renderCounterApp();

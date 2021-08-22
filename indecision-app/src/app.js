@@ -2,67 +2,57 @@ console.log('Testing script file!');
 
 // JSX - JavaScript XML
 
-const data = {
+const app = {
     title: 'Just another title',
     subtitle: 'Another boring text for testing purposes.',
-    options: ['Beer', 'Coke']
+    options: ['One', 'Two']
 };
 
-const template = ( 
-    <div>
-        <h1>{data.title}</h1>
-        {data.subtitle && <p>{data.subtitle}</p>}
-        {data.options.length > 0 ? <p>Here are your options.</p> : <p>No options, sorry.</p>}
-        <ol>
-            <li>{<p>Item {data.options[0]}</p>}</li>
-            <li>{<p>Item {data.options[1]}</p>}</li>
-        </ol>
-    </div>
-);
+const onFormSubmit = (event) => {
+    event.preventDefault();
+    const option = event.target.elements.option.value;
 
-// Challenge 1
+    if(option) {
+        app.options.push(option);
+        console.log(option);
+        event.target.elements.option.value = '';
+        renderIndecisionApp();
+    }
+};
 
-const user = {
-    name: 'Antonio',
-    age: 51,
-    location: 'Korčula'
-}
-
-function getLocation(location) {
-    if(location) {
-        return <p>Location: {location}</p>;
+const removeOptions = () => {
+    if(app.options.length) {
+        app.options = [];
+        renderIndecisionApp();
     }
 }
-let count = 0;
-
-const addOne = () => {
-    count++;
-    renderCounterApp();
-};
-
-const subOne = () => {
-    count--;
-    renderCounterApp();
-};
-
-const reset = () => {
-    count = 0;
-    renderCounterApp();
-};
-
 
 const appRoot = document.getElementById('app');
 
-const renderCounterApp = () => {
-    const templateTwo = (
+const renderIndecisionApp = () => {
+
+    const template = ( 
         <div>
-            <h1>Count: {count} </h1>
-            <button onClick={addOne} className="btnAdd">+1</button>
-            <button onClick={subOne} className="btnSub">-1</button>
-            <button onClick={reset} className="btnRes">Reset</button>
+            <h1>{app.title}</h1>
+            {app.subtitle && <p>{app.subtitle}</p>}
+            {app.options.length > 0 ? <p>You have {app.options.length} options.</p> : <p>No options, sorry.</p>}
+            
+                <button onClick = {removeOptions}>Remove All</button>
+            
+            <ol>
+                <li>{<p>Item {app.options[0]}</p>}</li>
+                <li>{<p>Item {app.options[1]}</p>}</li>
+            </ol>
+    
+            <form onSubmit={onFormSubmit}>
+                <input type="text" name="option"/>
+                <button>Add Option</button>
+            </form>
         </div>
     );
-    ReactDOM.render(templateTwo, appRoot);
-};
+    
+    ReactDOM.render(template, appRoot);
 
-renderCounterApp();
+}
+
+renderIndecisionApp();

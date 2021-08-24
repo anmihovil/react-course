@@ -29,7 +29,15 @@ var removeOptions = function removeOptions() {
     }
 };
 
+var optionChoice = function optionChoice() {
+    var randNum = Math.floor(Math.random() * app.options.length);
+    var option = app.options[randNum];
+    alert(option);
+};
+
 var appRoot = document.getElementById('app');
+
+var numbers = [55, 101, 1000];
 
 var renderIndecisionApp = function renderIndecisionApp() {
 
@@ -59,32 +67,26 @@ var renderIndecisionApp = function renderIndecisionApp() {
         ),
         React.createElement(
             'button',
+            { disabled: app.options.length === 0, onClick: optionChoice },
+            'What to do?'
+        ),
+        React.createElement(
+            'button',
             { onClick: removeOptions },
             'Remove All'
         ),
         React.createElement(
             'ol',
             null,
-            React.createElement(
-                'li',
-                null,
-                React.createElement(
-                    'p',
-                    null,
-                    'Item ',
-                    app.options[0]
-                )
-            ),
-            React.createElement(
-                'li',
-                null,
-                React.createElement(
-                    'p',
-                    null,
-                    'Item ',
-                    app.options[1]
-                )
-            )
+            app.options.map(function (item) {
+                return React.createElement(
+                    'li',
+                    { key: item },
+                    'Item: ',
+                    item
+                );
+                console.log(option);
+            })
         ),
         React.createElement(
             'form',
